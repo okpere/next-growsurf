@@ -1,13 +1,13 @@
-"use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+'use client';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Form() {
-  const [formData, setFormData] = useState({ name: "", email: "" });
+  const [formData, setFormData] = useState({ name: '', email: '' });
   const router = useRouter();
 
   useEffect(() => {
-    const savedData = localStorage.getItem("userFormData");
+    const savedData = localStorage.getItem('userFormData');
     if (savedData) {
       setFormData(JSON.parse(savedData));
     }
@@ -20,62 +20,64 @@ export default function Form() {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    localStorage.setItem("userFormData", JSON.stringify(formData));
+    localStorage.setItem('userFormData', JSON.stringify(formData));
 
     // GrowSurf API request
     try {
-      const res = await fetch("https://growsurf.com/api/v2/participants", {
-        method: "POST",
+      const res = await fetch('https://growsurf.com/api/v2/participants', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer YOUR_GROWSURF_API_KEY`, // Replace with your actual API key
         },
         body: JSON.stringify({
-          campaignId: "YOUR_CAMPAIGN_ID", // Replace with your actual campaign ID
+          campaignId: 'YOUR_CAMPAIGN_ID', // Replace with your actual campaign ID
           email: formData.email,
           firstName: formData.name,
         }),
       });
 
       if (!res.ok) {
-        throw new Error("Failed to register with GrowSurf");
+        throw new Error('Failed to register with GrowSurf');
       }
 
-      console.log("GrowSurf registration successful");
+      console.log('GrowSurf registration successful');
     } catch (error) {
-      console.error("GrowSurf Error:", error);
+      console.error('GrowSurf Error:', error);
     }
 
-    alert("Form data saved!");
-    router.push("/dashboard");
+    alert('Form data saved!');
+    router.push('/dashboard');
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 border rounded shadow">
-      <h2 className="text-xl font-bold mb-4">User Form</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Enter your name"
-          className="p-2 border rounded"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Enter your email"
-          className="p-2 border rounded"
-          required
-        />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-          Save & Go to Dashboard
-        </button>
-      </form>
+    <div className='flex items-center justify-center h-screen'>
+      <div className='max-w-md w-full p-6 border rounded shadow-lg'>
+        <h2 className='text-xl font-bold mb-4 text-center'>User Form</h2>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-3'>
+          <input
+            type='text'
+            name='name'
+            value={formData.name}
+            onChange={handleChange}
+            placeholder='Enter your name'
+            className='p-2 border rounded'
+            required
+          />
+          <input
+            type='email'
+            name='email'
+            value={formData.email}
+            onChange={handleChange}
+            placeholder='Enter your email'
+            className='p-2 border rounded'
+            required
+          />
+          <button type='submit' className='bg-blue-500 text-white p-2 rounded'>
+            Save & Go to Dashboard
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
