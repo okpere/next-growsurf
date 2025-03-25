@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Head from "next/head";
 
 export default function Form() {
   const [formData, setFormData] = useState({ name: '', email: '' });
@@ -51,6 +52,10 @@ export default function Form() {
   };
 
   return (
+    <>
+  
+   
+
     <div className='flex items-center justify-center h-screen'>
       <div className='max-w-md w-full p-6 border rounded shadow-lg'>
         <h2 className='text-xl font-bold mb-4 text-center'>User Form</h2>
@@ -79,5 +84,6 @@ export default function Form() {
         </form>
       </div>
     </div>
+    </>
   );
 }
