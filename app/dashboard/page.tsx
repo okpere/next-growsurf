@@ -1,6 +1,17 @@
 'use client';
 import { useState, useEffect } from 'react';
 
+declare global {
+  interface Window {
+    growsurf?: {
+      addParticipant: (participant: {
+        email: string;
+        firstName: string;
+      }) => void;
+    };
+  }
+}
+
 type UserData = {
   name: string;
   email: string;
@@ -10,9 +21,25 @@ export default function Dashboard() {
   const [userData, setUserData] = useState<UserData | null>(null);
 
   useEffect(() => {
-    const savedData = localStorage.getItem('userFormData');
-    if (savedData) {
-      setUserData(JSON.parse(savedData));
+    if (typeof window !== 'undefined') {
+      const savedData = localStorage.getItem('userFormData');
+      if (savedData) {
+        const parsedData = JSON.parse(savedData);
+        setUserData(parsedData);
+
+        // Register user to GrowSurf (check if the script is loaded)
+        if (
+          window.growsurf &&
+          typeof window.growsurf.addParticipant === 'function'
+        ) {
+          window.growsurf.addParticipant({
+            email: parsedData.email,
+            firstName: parsedData.name,
+          });
+        } else {
+          console.warn('GrowSurf is not initialized yet.');
+        }
+      }
     }
   }, []);
 
@@ -30,7 +57,7 @@ export default function Dashboard() {
           </p>
         </div>
       ) : (
-        <p>No user data found.</p>
+        <p>Loading...</p>
       )}
     </div>
   );
