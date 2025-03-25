@@ -29,10 +29,10 @@ export default function Form() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer YOUR_GROWSURF_API_KEY`, // Replace with your actual API key
+          Authorization: `Bearer XX4BK2VTBSMYMBQWGBDY6KHFV1TG`, // Replace with your actual API key
         },
         body: JSON.stringify({
-          campaignId: 'YOUR_CAMPAIGN_ID', // Replace with your actual campaign ID
+          campaignId: '10inlw', // Replace with your actual campaign ID
           email: formData.email,
           firstName: formData.name,
         }),
