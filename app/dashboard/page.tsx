@@ -39,11 +39,11 @@ export default function Dashboard() {
     setLoading(true);
     try {
       const response = await fetch(
-        `https://api.growsurf.com/v2/campaign/4pdlhb/participant/${userEmail}`,
+        `https://api.growsurf.com/v2/campaign/10inlw/participant/${userEmail}`,
         {
           method: 'GET',
           headers: {
-            Authorization: 'Bearer XX4BK2VTBSMYMBQWGBDY6KHFV1TG', 
+            Authorization: 'Bearer XX4BK2VTBSMYMBQWGBDY6KHFV1TG',
             'Content-Type': 'application/json',
           },
         }
