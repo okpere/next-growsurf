@@ -55,6 +55,7 @@ export default function Dashboard() {
 
       const data = await response.json();
       setParticipantData(data);
+      console.log(data);
     } catch (error) {
       console.error('GrowSurf Error:', error);
       setError('Failed to fetch participant data');
@@ -84,7 +85,7 @@ export default function Dashboard() {
             </div>
           )}
 
-          {participantData ? (
+          {/* {participantData ? (
             <div className='p-4 border rounded shadow-md'>
               <h2 className='text-lg font-semibold mb-2'>
                 GrowSurf Participant Details
@@ -106,7 +107,7 @@ export default function Dashboard() {
             </div>
           ) : (
             <p>No participant data found.</p>
-          )}
+          )} */}
         </>
       )}
     </div>
