@@ -12,7 +12,6 @@ type ParticipantData = {
   email: string;
   firstName: string;
   totalReferrals: number;
-  rewards: any[]; // Adjust type based on API response
 };
 
 export default function Dashboard() {
@@ -55,7 +54,6 @@ export default function Dashboard() {
 
       const data = await response.json();
       setParticipantData(data);
-      console.log(data);
     } catch (error) {
       console.error('GrowSurf Error:', error);
       setError('Failed to fetch participant data');
@@ -85,7 +83,7 @@ export default function Dashboard() {
             </div>
           )}
 
-          {/* {participantData ? (
+          {participantData ? (
             <div className='p-4 border rounded shadow-md'>
               <h2 className='text-lg font-semibold mb-2'>
                 GrowSurf Participant Details
@@ -100,14 +98,10 @@ export default function Dashboard() {
                 <strong>Total Referrals:</strong>{' '}
                 {participantData.totalReferrals}
               </p>
-              <p>
-                <strong>Rewards:</strong> {participantData.rewards.length}{' '}
-                earned
-              </p>
             </div>
           ) : (
             <p>No participant data found.</p>
-          )} */}
+          )}
         </>
       )}
     </div>
