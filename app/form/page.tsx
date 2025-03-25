@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Head from "next/head";
 
 export default function Form() {
   const [formData, setFormData] = useState({ name: '', email: '' });
@@ -24,14 +25,14 @@ export default function Form() {
 
     // GrowSurf API request
     try {
-      const res = await fetch('https://growsurf.com/api/v2/participants', {
+      const res = await fetch('https://growsurf.com/api/v2/participants ', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer YOUR_GROWSURF_API_KEY`, // Replace with your actual API key
+          Authorization: `Bearer XX4BK2VTBSMYMBQWGBDY6KHFV1TG`, // Replace with your actual API key
         },
         body: JSON.stringify({
-          campaignId: 'YOUR_CAMPAIGN_ID', // Replace with your actual campaign ID
+          campaignId: '10inlw', // Replace with your actual campaign ID
           email: formData.email,
           firstName: formData.name,
         }),
@@ -51,6 +52,10 @@ export default function Form() {
   };
 
   return (
+    <>
+  
+   
+
     <div className='flex items-center justify-center h-screen'>
       <div className='max-w-md w-full p-6 border rounded shadow-lg'>
         <h2 className='text-xl font-bold mb-4 text-center'>User Form</h2>
@@ -79,5 +84,6 @@ export default function Form() {
         </form>
       </div>
     </div>
+    </>
   );
 }
